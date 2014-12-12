@@ -144,20 +144,20 @@ end
 if length(pv) == 1 && strcmp(pv{1}, 'undo')
     Ad = getappdata(ax);
     if isfield(Ad, 'YTickText')
-        delete(Ad.YTickText);
-        set(ax, 'yticklabelmode', 'auto');
+        delete(Ad.YTickText); 
         rmappdata(ax, 'YTickText');
     end
+    set(ax, 'yticklabelmode', 'auto');
     if isfield(Ad, 'XTickText')
         delete(Ad.XTickText);
-        set(ax, 'xticklabelmode', 'auto');
         rmappdata(ax, 'XTickText');
     end
+    set(ax, 'xticklabelmode', 'auto');
     if isfield(Ad, 'ZTickText')
         delete(Ad.ZTickText);
-        set(ax, 'zticklabelmode', 'auto');
         rmappdata(ax, 'ZTickText');
     end
+    set(ax, 'zticklabelmode', 'auto');
     return
 end
 
@@ -172,7 +172,7 @@ Options = struct('xformat', [], 'yformat', [], 'zformat', [], ...
                  'ztickoffset', .08, 'axis', 'xy', 'panon', true, ...
                  'convert', false);
              
-Options = parse_pv_pairs(Options, pv);
+Options = parsepv(Options, pv);
 
 if ~isscalar(Options.ytickoffset) || ~isscalar(Options.xtickoffset) || ~isscalar(Options.ztickoffset)
     error('Offset values must be numerical scalars');
