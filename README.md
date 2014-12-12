@@ -1,11 +1,13 @@
 ## tick2text.m Documentation
 
 This function allows for more versatile labeling of axis ticks.  It
-  offers two possible modifications: 1) automatic reformatting of tick
-  labels based on a user-supplied format or function, and 2) conversion of
+  offers two possible modifications: 
+- automatic reformatting of tick
+  labels based on a user-supplied format or function
+- conversion of
   tick labels to text objects.
  
-  The first option simply offers a shortcut to manual reformatting via
+The first option simply offers a shortcut to manual reformatting via
   the [X/Y/Z]TickLabel properties of axes.  It also overrides the zoom/pan
   function of the axis so that ticks will update with your specified
   formatting as you zoom and pan.
