@@ -83,7 +83,7 @@ if verLessThan('matlab', '8.4.0')
     tick2text(gca, 'yformat', '.2f', ...
                    'xformat', @(x) sprintf('g\\pi', x/pi), ...
                    'convert', [true false])
-    set(getappdata(gca, 'XTickText'), 'rotation', -20);
+    set(getappdata(gca, 'XTickText'), 'rotation', -20, 'horiz', 'left');
 end
 ```
            
