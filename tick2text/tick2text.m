@@ -289,20 +289,37 @@ A = get(P.ax);
 
 % Create new labels
 
-xticklab = arrayfun(P.xfun, A.XTick, 'uni', 0);
-yticklab = arrayfun(P.yfun, A.YTick, 'uni', 0);
-zticklab = arrayfun(P.zfun, A.ZTick, 'uni', 0);
+if ~verLessThan('matlab', '8.4.0') && strcmp(P.ax.Type, 'colorbar')
+    cbflag = true;
+else
+    cbflag = false;
+end
+
+if cbflag
+    xticklab = arrayfun(P.xfun, A.Ticks, 'uni', 0);
+else
+    xticklab = arrayfun(P.xfun, A.XTick, 'uni', 0);
+    yticklab = arrayfun(P.yfun, A.YTick, 'uni', 0);
+    zticklab = arrayfun(P.zfun, A.ZTick, 'uni', 0);
+end
 
 % If no-convert option, simply replace tick labels
 
-if P.lflag(1) && ~P.cflag(1)
-    set(P.ax, 'XTick', A.XTick, 'XTickLabel', xticklab);
-end
-if P.lflag(2) && ~P.cflag(2)
-    set(P.ax, 'YTick', A.YTick, 'YTickLabel', yticklab);
-end
-if P.lflag(3) && ~P.cflag(3)
-    set(P.ax, 'ZTick', A.ZTick, 'ZTickLabel', zticklab);
+if cbflag 
+    if any(P.cflag)
+        error('Conversion option not offered for colorbars yet');
+    end
+    set(P.ax, 'Ticks', A.Ticks, 'TickLabels', xticklab);
+else
+    if P.lflag(1) && ~P.cflag(1)
+        set(P.ax, 'XTick', A.XTick, 'XTickLabel', xticklab);
+    end
+    if P.lflag(2) && ~P.cflag(2)
+        set(P.ax, 'YTick', A.YTick, 'YTickLabel', yticklab);
+    end
+    if P.lflag(3) && ~P.cflag(3)
+        set(P.ax, 'ZTick', A.ZTick, 'ZTickLabel', zticklab);
+    end
 end
 
 % Exit if no conversion calcs necessary
