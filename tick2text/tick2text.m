@@ -167,12 +167,25 @@ fig = ancestor(ax, 'figure');
 
 % Parse and check optional variables
 
-Options = struct('xformat', [], 'yformat', [], 'zformat', [], ...
-                 'ytickoffset', .04, 'xtickoffset', .04, ...
-                 'ztickoffset', .08, 'axis', 'xy', 'panon', true, ...
-                 'convert', false);
-             
-Options = parsepv(Options, pv);
+p = inputParser;
+p.addParameter('xformat', []);
+p.addParameter('yformat', []);
+p.addParameter('zformat', []);
+p.addParameter('ytickoffset', 0.04);
+p.addParameter('xtickoffset', 0.04);
+p.addParameter('ztickoffset', 0.08);
+p.addParameter('axis', 'xy');
+p.addParameter('panon', true);
+p.addParameter('convert', false);
+p.parse(varargin{:});
+Options = p.Results;
+
+% Options = struct('xformat', [], 'yformat', [], 'zformat', [], ...
+%                  'ytickoffset', .04, 'xtickoffset', .04, ...
+%                  'ztickoffset', .08, 'axis', 'xy', 'panon', true, ...
+%                  'convert', false);
+% 
+% Options = parsepv(Options, pv);
 
 if ~isscalar(Options.ytickoffset) || ~isscalar(Options.xtickoffset) || ~isscalar(Options.ztickoffset)
     error('Offset values must be numerical scalars');
